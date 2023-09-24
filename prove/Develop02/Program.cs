@@ -56,10 +56,8 @@ class Journal
         }
     }
 
-    public void SaveToFile()
+    public void SaveToFile(string filename)
     {
-        Console.Write("Enter the filename to save the journal: ");
-        string filename = Console.ReadLine();
         using (StreamWriter writer = new StreamWriter(filename))
         {
             foreach (JournalEntry entry in entries)
@@ -73,10 +71,8 @@ class Journal
         Console.WriteLine($"Journal saved to {filename}");
     }
 
-    public void LoadFromFile()
+    public void LoadFromFile(string filename)
     {
-        Console.Write("Enter the filename to load the journal: ");
-        string filename = Console.ReadLine();
         try
         {
             using (StreamReader reader = new StreamReader(filename))
@@ -130,10 +126,14 @@ class Program
                         journal.DisplayEntries();
                         break;
                     case 3:
-                        journal.SaveToFile();
+                        Console.Write("Enter the filename to save the journal: ");
+                        string saveFilename = Console.ReadLine();
+                        journal.SaveToFile(saveFilename);
                         break;
                     case 4:
-                        journal.LoadFromFile();
+                        Console.Write("Enter the filename to load the journal: ");
+                        string loadFilename = Console.ReadLine();
+                        journal.LoadFromFile(loadFilename);
                         break;
                     case 5:
                         Environment.Exit(0);
